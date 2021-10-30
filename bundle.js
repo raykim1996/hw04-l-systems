@@ -122,29 +122,16 @@ function equals(a, b) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return gl; });
-/* harmony export (immutable) */ __webpack_exports__["b"] = setGL;
-var gl;
-function setGL(_gl) {
-    gl = _gl;
-}
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gl_matrix_common_js__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gl_matrix_mat2_js__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__gl_matrix_mat2d_js__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gl_matrix_mat3_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__gl_matrix_quat_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gl_matrix_mat3_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gl_matrix_mat4_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__gl_matrix_quat_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__gl_matrix_quat2_js__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__gl_matrix_vec2_js__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec3_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__gl_matrix_vec4_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__gl_matrix_vec3_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__gl_matrix_vec4_js__ = __webpack_require__(10);
 /* unused harmony reexport glMatrix */
 /* unused harmony reexport mat2 */
 /* unused harmony reexport mat2d */
@@ -166,6 +153,19 @@ function setGL(_gl) {
 
 
 
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return gl; });
+/* harmony export (immutable) */ __webpack_exports__["b"] = setGL;
+var gl;
+function setGL(_gl) {
+    gl = _gl;
+}
 
 
 /***/ }),
@@ -230,6 +230,154 @@ function invert(out, a) {
 
 /***/ }),
 /* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globals__ = __webpack_require__(2);
+
+class Drawable {
+    constructor() {
+        this.count = 0;
+        this.idxGenerated = false;
+        this.posGenerated = false;
+        this.norGenerated = false;
+        this.colGenerated = false;
+        this.translateGenerated = false;
+        this.uvGenerated = false;
+        this.transform0Generated = false;
+        this.transform1Generated = false;
+        this.transform2Generated = false;
+        this.transform3Generated = false;
+        this.numInstances = 0; // How many instances of this Drawable the shader program should draw
+    }
+    destory() {
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufIdx);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufPos);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufNor);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufCol);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufTranslate);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufUV);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufTransform0);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufTransform1);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufTransform2);
+        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufTransform3);
+    }
+    generateIdx() {
+        this.idxGenerated = true;
+        this.bufIdx = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generatePos() {
+        this.posGenerated = true;
+        this.bufPos = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateNor() {
+        this.norGenerated = true;
+        this.bufNor = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateCol() {
+        this.colGenerated = true;
+        this.bufCol = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateTranslate() {
+        this.translateGenerated = true;
+        this.bufTranslate = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateUV() {
+        this.uvGenerated = true;
+        this.bufUV = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateTransform0() {
+        this.transform0Generated = true;
+        this.bufTransform0 = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateTransform1() {
+        this.transform1Generated = true;
+        this.bufTransform1 = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateTransform2() {
+        this.transform2Generated = true;
+        this.bufTransform2 = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    generateTransform3() {
+        this.transform3Generated = true;
+        this.bufTransform3 = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
+    }
+    bindIdx() {
+        if (this.idxGenerated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
+        }
+        return this.idxGenerated;
+    }
+    bindPos() {
+        if (this.posGenerated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
+        }
+        return this.posGenerated;
+    }
+    bindNor() {
+        if (this.norGenerated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
+        }
+        return this.norGenerated;
+    }
+    bindCol() {
+        if (this.colGenerated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
+        }
+        return this.colGenerated;
+    }
+    bindTranslate() {
+        if (this.translateGenerated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTranslate);
+        }
+        return this.translateGenerated;
+    }
+    bindUV() {
+        if (this.uvGenerated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufUV);
+        }
+        return this.uvGenerated;
+    }
+    bindTransform0() {
+        if (this.transform0Generated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform0);
+        }
+        return this.transform0Generated;
+    }
+    bindTransform1() {
+        if (this.transform1Generated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform1);
+        }
+        return this.transform1Generated;
+    }
+    bindTransform2() {
+        if (this.transform2Generated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform2);
+        }
+        return this.transform2Generated;
+    }
+    bindTransform3() {
+        if (this.transform3Generated) {
+            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform3);
+        }
+        return this.transform3Generated;
+    }
+    elemCount() {
+        return this.count;
+    }
+    drawMode() {
+        return __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].TRIANGLES;
+    }
+    setNumInstances(num) {
+        this.numInstances = num;
+    }
+}
+;
+/* harmony default export */ __webpack_exports__["a"] = (Drawable);
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = normalize;
@@ -257,7 +405,7 @@ function normalize(out, a) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1107,7 +1255,7 @@ var mul = multiply;
 var sub = subtract;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3003,7 +3151,7 @@ var mul = multiply;
 var sub = subtract;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3043,9 +3191,9 @@ var sub = subtract;
 /* unused harmony export sqlerp */
 /* unused harmony export setAxes */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mat3_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vec3_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vec4_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mat3_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__vec3_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__vec4_js__ = __webpack_require__(10);
 
 
 
@@ -3709,7 +3857,7 @@ var setAxes = function () {
 }();
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4551,7 +4699,7 @@ var forEach = function () {
 }();
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5210,106 +5358,6 @@ var forEach = function () {
     return a;
   };
 }();
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__globals__ = __webpack_require__(1);
-
-class Drawable {
-    constructor() {
-        this.count = 0;
-        this.idxGenerated = false;
-        this.posGenerated = false;
-        this.norGenerated = false;
-        this.colGenerated = false;
-        this.translateGenerated = false;
-        this.uvGenerated = false;
-        this.numInstances = 0; // How many instances of this Drawable the shader program should draw
-    }
-    destory() {
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufIdx);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufPos);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufNor);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufCol);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufTranslate);
-        __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].deleteBuffer(this.bufUV);
-    }
-    generateIdx() {
-        this.idxGenerated = true;
-        this.bufIdx = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generatePos() {
-        this.posGenerated = true;
-        this.bufPos = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generateNor() {
-        this.norGenerated = true;
-        this.bufNor = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generateCol() {
-        this.colGenerated = true;
-        this.bufCol = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generateTranslate() {
-        this.translateGenerated = true;
-        this.bufTranslate = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    generateUV() {
-        this.uvGenerated = true;
-        this.bufUV = __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].createBuffer();
-    }
-    bindIdx() {
-        if (this.idxGenerated) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
-        }
-        return this.idxGenerated;
-    }
-    bindPos() {
-        if (this.posGenerated) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
-        }
-        return this.posGenerated;
-    }
-    bindNor() {
-        if (this.norGenerated) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
-        }
-        return this.norGenerated;
-    }
-    bindCol() {
-        if (this.colGenerated) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
-        }
-        return this.colGenerated;
-    }
-    bindTranslate() {
-        if (this.translateGenerated) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTranslate);
-        }
-        return this.translateGenerated;
-    }
-    bindUV() {
-        if (this.uvGenerated) {
-            __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].ARRAY_BUFFER, this.bufUV);
-        }
-        return this.uvGenerated;
-    }
-    elemCount() {
-        return this.count;
-    }
-    drawMode() {
-        return __WEBPACK_IMPORTED_MODULE_0__globals__["a" /* gl */].TRIANGLES;
-    }
-    setNumInstances(num) {
-        this.numInstances = num;
-    }
-}
-;
-/* harmony default export */ __webpack_exports__["a"] = (Drawable);
-
 
 /***/ }),
 /* 11 */
@@ -5996,7 +6044,7 @@ function determinant(a) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stats_js__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stats_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_stats_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dat_gui__ = __webpack_require__(27);
@@ -6005,8 +6053,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__geometry_ScreenQuad__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rendering_gl_OpenGLRenderer__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Camera__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__globals__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__globals__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__geometry_Mesh__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__geometry_cylinderObj__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__LSystem__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__geometry_dodecObj__ = __webpack_require__(74);
+
+
+
+
 
 
 
@@ -6018,15 +6074,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // Define an object with application parameters and button callbacks
 // This will be referred to by dat.GUI's functions that add GUI elements.
-const controls = {};
+const controls = {
+    angle: 25,
+    iterations: 2,
+    currColor: [130, 130, 130, 1]
+};
 let square;
 let screenQuad;
+let cylinder;
 let time = 0.0;
+let lsystem;
+let dodec;
+let prevIter = 2;
+let prevAngle = 25;
+let prevColor = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues(0.5, 0.5, 0.5, 1.0);
 function loadScene() {
+    let newColor = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues((controls.currColor[0] / 255.0), (controls.currColor[1] / 255.0), (controls.currColor[2] / 255.0), 1);
+    lsystem = new __WEBPACK_IMPORTED_MODULE_11__LSystem__["a" /* default */](controls.iterations, controls.angle, newColor);
+    // lsystem.expandGrammar();
     square = new __WEBPACK_IMPORTED_MODULE_3__geometry_Square__["a" /* default */]();
     square.create();
     screenQuad = new __WEBPACK_IMPORTED_MODULE_4__geometry_ScreenQuad__["a" /* default */]();
     screenQuad.create();
+    cylinder = new __WEBPACK_IMPORTED_MODULE_9__geometry_Mesh__["a" /* default */](__WEBPACK_IMPORTED_MODULE_10__geometry_cylinderObj__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0.0, 0.0, 0.0));
+    // cylinder = new Mesh(wahooObjStr, vec3.fromValues(0.0, 0.0, 0.0));
+    cylinder.create();
+    dodec = new __WEBPACK_IMPORTED_MODULE_9__geometry_Mesh__["a" /* default */](__WEBPACK_IMPORTED_MODULE_12__geometry_dodecObj__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0.0, 0.0, 0.0));
+    dodec.create();
     // Set up instanced rendering data arrays here.
     // This example creates a set of positional
     // offsets and gradiated colors for a 100x100 grid
@@ -6050,6 +6124,25 @@ function loadScene() {
     let colors = new Float32Array(colorsArray);
     square.setInstanceVBOs(offsets, colors);
     square.setNumInstances(n * n); // grid of "particles"
+    let col0 = [1.0, 0.0, 0.0, 0.0];
+    let col1 = [0.0, 1.0, 0.0, 0.0];
+    let col2 = [0.0, 0.0, 1.0, 0.0];
+    let col3 = [0.0, 0.0, 0.0, 1.0];
+    lsystem.runOperations();
+    let colArr0 = new Float32Array(lsystem.cylinderTransformCol0);
+    let colArr1 = new Float32Array(lsystem.cylinderTransformCol1);
+    let colArr2 = new Float32Array(lsystem.cylinderTransformCol2);
+    let colArr3 = new Float32Array(lsystem.cylinderTransformCol3);
+    let colorArr = new Float32Array(lsystem.cylinderColorCol);
+    cylinder.setInstanceVBOs(colArr0, colArr1, colArr2, colArr3, colorArr);
+    cylinder.setNumInstances(lsystem.cylinderNum);
+    let dodecColArr0 = new Float32Array(lsystem.dodecTransformCol0);
+    let dodecColArr1 = new Float32Array(lsystem.dodecTransformCol1);
+    let dodecColArr2 = new Float32Array(lsystem.dodecTransformCol2);
+    let dodecColArr3 = new Float32Array(lsystem.dodecTransformCol3);
+    let dodecColorArr = new Float32Array(lsystem.dodecColorCol);
+    dodec.setInstanceVBOs(dodecColArr0, dodecColArr1, dodecColArr2, dodecColArr3, dodecColorArr);
+    dodec.setNumInstances(lsystem.dodecNum);
 }
 function main() {
     // Initial display for framerate
@@ -6061,6 +6154,9 @@ function main() {
     document.body.appendChild(stats.domElement);
     // Add controls to the gui
     const gui = new __WEBPACK_IMPORTED_MODULE_2_dat_gui__["GUI"]();
+    gui.add(controls, 'angle', 10, 80).step(1);
+    gui.add(controls, 'iterations', 1, 6).step(1);
+    gui.addColor(controls, "currColor");
     // get canvas and webgl context
     const canvas = document.getElementById('canvas');
     const gl = canvas.getContext('webgl2');
@@ -6072,21 +6168,45 @@ function main() {
     Object(__WEBPACK_IMPORTED_MODULE_7__globals__["b" /* setGL */])(gl);
     // Initial call to load scene
     loadScene();
-    const camera = new __WEBPACK_IMPORTED_MODULE_6__Camera__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(50, 50, 10), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(50, 50, 0));
+    const camera = new __WEBPACK_IMPORTED_MODULE_6__Camera__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(10, 20, -20), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0, 30, 0));
     const renderer = new __WEBPACK_IMPORTED_MODULE_5__rendering_gl_OpenGLRenderer__["a" /* default */](canvas);
     renderer.setClearColor(0.2, 0.2, 0.2, 1);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.ONE, gl.ONE); // Additive blending
+    // gl.enable(gl.BLEND);
+    // gl.blendFunc(gl.ONE, gl.ONE); // Additive blending
+    gl.enable(gl.DEPTH_TEST);
     const instancedShader = new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["b" /* default */]([
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(69)),
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(70)),
+        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(75)),
+        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(76)),
     ]);
     const flat = new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["b" /* default */]([
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(71)),
-        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(72)),
+        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.VERTEX_SHADER, __webpack_require__(77)),
+        new __WEBPACK_IMPORTED_MODULE_8__rendering_gl_ShaderProgram__["a" /* Shader */](gl.FRAGMENT_SHADER, __webpack_require__(78)),
     ]);
     // This function will be called every frame
     function tick() {
+        let newColor = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues((controls.currColor[0] / 255.0), (controls.currColor[1] / 255.0), (controls.currColor[2] / 255.0), 1);
+        if (controls.angle != prevAngle || controls.iterations != prevIter || (newColor[0] != prevColor[0] || newColor[1] != prevColor[1] || newColor[2] != prevColor[2])) {
+            prevAngle = controls.angle;
+            prevIter = controls.iterations;
+            prevColor = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues((controls.currColor[0] / 255.0), (controls.currColor[1] / 255.0), (controls.currColor[2] / 255.0), 1);
+            lsystem = new __WEBPACK_IMPORTED_MODULE_11__LSystem__["a" /* default */](controls.iterations, controls.angle, newColor);
+            lsystem.expandGrammar();
+            lsystem.runOperations();
+            let colArr0 = new Float32Array(lsystem.cylinderTransformCol0);
+            let colArr1 = new Float32Array(lsystem.cylinderTransformCol1);
+            let colArr2 = new Float32Array(lsystem.cylinderTransformCol2);
+            let colArr3 = new Float32Array(lsystem.cylinderTransformCol3);
+            let colorArr = new Float32Array(lsystem.cylinderColorCol);
+            cylinder.setInstanceVBOs(colArr0, colArr1, colArr2, colArr3, colorArr);
+            cylinder.setNumInstances(lsystem.cylinderNum);
+            let dodecColArr0 = new Float32Array(lsystem.dodecTransformCol0);
+            let dodecColArr1 = new Float32Array(lsystem.dodecTransformCol1);
+            let dodecColArr2 = new Float32Array(lsystem.dodecTransformCol2);
+            let dodecColArr3 = new Float32Array(lsystem.dodecTransformCol3);
+            let dodecColorArr = new Float32Array(lsystem.dodecColorCol);
+            dodec.setInstanceVBOs(dodecColArr0, dodecColArr1, dodecColArr2, dodecColArr3, dodecColorArr);
+            dodec.setNumInstances(lsystem.dodecNum);
+        }
         camera.update();
         stats.begin();
         instancedShader.setTime(time);
@@ -6095,7 +6215,8 @@ function main() {
         renderer.clear();
         renderer.render(camera, flat, [screenQuad]);
         renderer.render(camera, instancedShader, [
-            square,
+            // square, 
+            cylinder, dodec
         ]);
         stats.end();
         // Tell the browser to call `tick` again whenever it renders a new frame
@@ -7145,8 +7266,8 @@ var sub = subtract;
 /* unused harmony export exactEquals */
 /* unused harmony export equals */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__quat_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mat4_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__quat_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mat4_js__ = __webpack_require__(7);
 
 
 
@@ -13112,8 +13233,8 @@ dat.utils.common);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(2);
 
 
 class Square extends __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__["a" /* default */] {
@@ -13156,8 +13277,8 @@ class Square extends __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__["a" /*
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(2);
 
 
 class ScreenQuad extends __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__["a" /* default */] {
@@ -13191,8 +13312,8 @@ class ScreenQuad extends __WEBPACK_IMPORTED_MODULE_0__rendering_gl_Drawable__["a
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(2);
 
 
 // In this file, `gl` is accessible because it is imported above
@@ -13236,7 +13357,7 @@ class OpenGLRenderer {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
 var CameraControls = __webpack_require__(34);
 
 class Camera {
@@ -13719,7 +13840,7 @@ var filterVector = __webpack_require__(11)
 var invert44     = __webpack_require__(3)
 var rotateM      = __webpack_require__(40)
 var cross        = __webpack_require__(13)
-var normalize3   = __webpack_require__(4)
+var normalize3   = __webpack_require__(5)
 var dot3         = __webpack_require__(14)
 
 function len3(x, y, z) {
@@ -14912,7 +15033,7 @@ var rotateZ   = __webpack_require__(59)
 var lookAt    = __webpack_require__(15)
 var translate = __webpack_require__(17)
 var scale     = __webpack_require__(19)
-var normalize = __webpack_require__(4)
+var normalize = __webpack_require__(5)
 
 var DEFAULT_CENTER = [0,0,0]
 
@@ -15383,7 +15504,7 @@ var invert = __webpack_require__(3)
 var transpose = __webpack_require__(53)
 var vec3 = {
     length: __webpack_require__(54),
-    normalize: __webpack_require__(4),
+    normalize: __webpack_require__(5),
     dot: __webpack_require__(14),
     cross: __webpack_require__(13)
 }
@@ -16363,8 +16484,8 @@ module.exports = true;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__globals__ = __webpack_require__(2);
 
 
 var activeProgram = null;
@@ -16392,8 +16513,13 @@ class ShaderProgram {
             throw __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getProgramInfoLog(this.prog);
         }
         this.attrPos = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Pos");
+        this.attrNor = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Nor");
         this.attrCol = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Col");
         this.attrTranslate = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Translate");
+        this.attrTransform0 = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Transform0");
+        this.attrTransform1 = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Transform1");
+        this.attrTransform2 = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Transform2");
+        this.attrTransform3 = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_Transform3");
         this.attrUV = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getAttribLocation(this.prog, "vs_UV");
         this.unifModel = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_Model");
         this.unifModelInvTr = __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].getUniformLocation(this.prog, "u_ModelInvTr");
@@ -16486,6 +16612,26 @@ class ShaderProgram {
             __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribDivisor(this.attrUV, 0); // Advance 1 index in pos VBO for each vertex
         }
         // TODO: Set up attribute data for additional instanced rendering data as needed
+        if (this.attrTransform0 != -1 && d.bindTransform0()) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].enableVertexAttribArray(this.attrTransform0);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribPointer(this.attrTransform0, 4, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].FLOAT, false, 0, 0);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribDivisor(this.attrTransform0, 1); // Advance 1 index in transform0 VBO for each drawn instance
+        }
+        if (this.attrTransform1 != -1 && d.bindTransform1()) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].enableVertexAttribArray(this.attrTransform1);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribPointer(this.attrTransform1, 4, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].FLOAT, false, 0, 0);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribDivisor(this.attrTransform1, 1); // Advance 1 index in transform0 VBO for each drawn instance
+        }
+        if (this.attrTransform2 != -1 && d.bindTransform2()) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].enableVertexAttribArray(this.attrTransform2);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribPointer(this.attrTransform2, 4, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].FLOAT, false, 0, 0);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribDivisor(this.attrTransform2, 1); // Advance 1 index in transform0 VBO for each drawn instance
+        }
+        if (this.attrTransform3 != -1 && d.bindTransform3()) {
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].enableVertexAttribArray(this.attrTransform3);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribPointer(this.attrTransform3, 4, __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].FLOAT, false, 0, 0);
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].vertexAttribDivisor(this.attrTransform3, 1); // Advance 1 index in transform0 VBO for each drawn instance
+        }
         d.bindIdx();
         // drawElementsInstanced uses the vertexAttribDivisor for each "in" variable to
         // determine how to link it to each drawn instance of the bound VBO.
@@ -16509,6 +16655,14 @@ class ShaderProgram {
             __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrTranslate);
         if (this.attrUV != -1)
             __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrUV);
+        if (this.attrTransform0 != -1)
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrTransform0);
+        if (this.attrTransform1 != -1)
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrTransform1);
+        if (this.attrTransform2 != -1)
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrTransform2);
+        if (this.attrTransform3 != -1)
+            __WEBPACK_IMPORTED_MODULE_1__globals__["a" /* gl */].disableVertexAttribArray(this.attrTransform3);
     }
 }
 ;
@@ -16517,24 +16671,1040 @@ class ShaderProgram {
 
 /***/ }),
 /* 69 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "#version 300 es\n\nuniform mat4 u_ViewProj;\nuniform float u_Time;\n\nuniform mat3 u_CameraAxes; // Used for rendering particles as billboards (quads that are always looking at the camera)\n// gl_Position = center + vs_Pos.x * camRight + vs_Pos.y * camUp;\n\nin vec4 vs_Pos; // Non-instanced; each particle is the same quad drawn in a different place\nin vec4 vs_Nor; // Non-instanced, and presently unused\nin vec4 vs_Col; // An instanced rendering attribute; each particle instance has a different color\nin vec3 vs_Translate; // Another instance rendering attribute used to position each quad instance in the scene\nin vec2 vs_UV; // Non-instanced, and presently unused in main(). Feel free to use it for your meshes.\n\nout vec4 fs_Col;\nout vec4 fs_Pos;\n\nvoid main()\n{\n    fs_Col = vs_Col;\n    fs_Pos = vs_Pos;\n\n    vec3 offset = vs_Translate;\n    offset.z = (sin((u_Time + offset.x) * 3.14159 * 0.1) + cos((u_Time + offset.y) * 3.14159 * 0.1)) * 1.5;\n\n    vec3 billboardPos = offset + vs_Pos.x * u_CameraAxes[0] + vs_Pos.y * u_CameraAxes[1];\n\n    gl_Position = u_ViewProj * vec4(billboardPos, 1.0);\n}\n"
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_webgl_obj_loader__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_webgl_obj_loader___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_webgl_obj_loader__);
+
+
+
+
+class Mesh extends __WEBPACK_IMPORTED_MODULE_1__rendering_gl_Drawable__["a" /* default */] {
+    constructor(objString, center) {
+        super(); // Call the constructor of the super class. This is required.
+        this.center = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["d" /* vec4 */].fromValues(center[0], center[1], center[2], 1);
+        this.objString = objString;
+    }
+    create() {
+        let posTemp = [];
+        let norTemp = [];
+        let uvsTemp = [];
+        let idxTemp = [];
+        var loadedMesh = new __WEBPACK_IMPORTED_MODULE_3_webgl_obj_loader__["Mesh"](this.objString);
+        //posTemp = loadedMesh.vertices;
+        for (var i = 0; i < loadedMesh.vertices.length; i++) {
+            posTemp.push(loadedMesh.vertices[i]);
+            if (i % 3 == 2)
+                posTemp.push(1.0);
+        }
+        for (var i = 0; i < loadedMesh.vertexNormals.length; i++) {
+            norTemp.push(loadedMesh.vertexNormals[i]);
+            if (i % 3 == 2)
+                norTemp.push(0.0);
+        }
+        uvsTemp = loadedMesh.textures;
+        idxTemp = loadedMesh.indices;
+        // white vert color for now
+        this.colors = new Float32Array(posTemp.length);
+        for (var i = 0; i < posTemp.length; ++i) {
+            this.colors[i] = 1.0;
+        }
+        this.indices = new Uint32Array(idxTemp);
+        this.normals = new Float32Array(norTemp);
+        this.positions = new Float32Array(posTemp);
+        this.uvs = new Float32Array(uvsTemp);
+        this.generateIdx();
+        this.generatePos();
+        this.generateNor();
+        this.generateUV();
+        this.generateCol();
+        this.generateTransform0();
+        this.generateTransform1();
+        this.generateTransform2();
+        this.generateTransform3();
+        this.count = this.indices.length;
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.bufIdx);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ELEMENT_ARRAY_BUFFER, this.indices, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufNor);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.normals, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufPos);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.positions, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.colors, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufUV);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.uvs, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        console.log(`Created Mesh from OBJ`);
+        this.objString = ""; // hacky clear
+    }
+    setInstanceVBOs(col0, col1, col2, col3, colors) {
+        this.colors = colors;
+        this.transformMatCol0 = col0;
+        this.transformMatCol1 = col1;
+        this.transformMatCol2 = col2;
+        this.transformMatCol3 = col3;
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufCol);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.colors, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform0);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.transformMatCol0, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform1);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.transformMatCol1, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform2);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.transformMatCol2, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bindBuffer(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.bufTransform3);
+        __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].bufferData(__WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].ARRAY_BUFFER, this.transformMatCol3, __WEBPACK_IMPORTED_MODULE_2__globals__["a" /* gl */].STATIC_DRAW);
+    }
+}
+;
+/* harmony default export */ __webpack_exports__["a"] = (Mesh);
+
 
 /***/ }),
 /* 70 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "#version 300 es\nprecision highp float;\n\nin vec4 fs_Col;\nin vec4 fs_Pos;\n\nout vec4 out_Col;\n\nvoid main()\n{\n    float dist = 1.0 - (length(fs_Pos.xyz) * 2.0);\n    out_Col = vec4(dist) * fs_Col;\n}\n"
+!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define("OBJ",[],t):"object"==typeof exports?exports.OBJ=t():e.OBJ=t()}("undefined"!=typeof self?self:this,function(){return function(e){function t(a){if(r[a])return r[a].exports;var n=r[a]={i:a,l:!1,exports:{}};return e[a].call(n.exports,n,n.exports,t),n.l=!0,n.exports}var r={};return t.m=e,t.c=r,t.d=function(exports,e,r){t.o(exports,e)||Object.defineProperty(exports,e,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(r,"a",r),r},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/",t(t.s=3)}([function(e,exports,t){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function a(e){switch(e){case"BYTE":case"UNSIGNED_BYTE":return 1;case"SHORT":case"UNSIGNED_SHORT":return 2;case"FLOAT":return 4}}Object.defineProperty(exports,"__esModule",{value:!0});var n=exports.Layout=function e(){r(this,e);for(var t=arguments.length,a=Array(t),n=0;n<t;n++)a[n]=arguments[n];this.attributes=a;var s=0,l=0,o=!0,u=!1,c=void 0;try{for(var f,h=a[Symbol.iterator]();!(o=(f=h.next()).done);o=!0){var p=f.value;if(this[p.key])throw new i(p);s%p.sizeOfType!=0&&(s+=p.sizeOfType-s%p.sizeOfType),this[p.key]={attribute:p,size:p.size,type:p.type,normalized:p.normalized,offset:s},s+=p.sizeInBytes,l=Math.max(l,p.sizeOfType)}}catch(e){u=!0,c=e}finally{try{!o&&h.return&&h.return()}finally{if(u)throw c}}s%l!=0&&(s+=l-s%l),this.stride=s;var v=!0,d=!1,y=void 0;try{for(var m,M=a[Symbol.iterator]();!(v=(m=M.next()).done);v=!0){this[m.value.key].stride=this.stride}}catch(e){d=!0,y=e}finally{try{!v&&M.return&&M.return()}finally{if(d)throw y}}},i=function e(t){r(this,e),this.message="found duplicate attribute: "+t.key},s=function e(t,n,i){arguments.length>3&&void 0!==arguments[3]&&arguments[3];r(this,e),this.key=t,this.size=n,this.type=i,this.normalized=!1,this.sizeOfType=a(i),this.sizeInBytes=this.sizeOfType*n};n.POSITION=new s("position",3,"FLOAT"),n.NORMAL=new s("normal",3,"FLOAT"),n.TANGENT=new s("tangent",3,"FLOAT"),n.BITANGENT=new s("bitangent",3,"FLOAT"),n.UV=new s("uv",2,"FLOAT"),n.MATERIAL_INDEX=new s("materialIndex",1,"SHORT"),n.MATERIAL_ENABLED=new s("materialEnabled",1,"UNSIGNED_SHORT"),n.AMBIENT=new s("ambient",3,"FLOAT"),n.DIFFUSE=new s("diffuse",3,"FLOAT"),n.SPECULAR=new s("specular",3,"FLOAT"),n.SPECULAR_EXPONENT=new s("specularExponent",3,"FLOAT"),n.EMISSIVE=new s("emissive",3,"FLOAT"),n.TRANSMISSION_FILTER=new s("transmissionFilter",3,"FLOAT"),n.DISSOLVE=new s("dissolve",1,"FLOAT"),n.ILLUMINATION=new s("illumination",1,"UNSIGNED_SHORT"),n.REFRACTION_INDEX=new s("refractionIndex",1,"FLOAT"),n.SHARPNESS=new s("sharpness",1,"FLOAT"),n.MAP_DIFFUSE=new s("mapDiffuse",1,"SHORT"),n.MAP_AMBIENT=new s("mapAmbient",1,"SHORT"),n.MAP_SPECULAR=new s("mapSpecular",1,"SHORT"),n.MAP_SPECULAR_EXPONENT=new s("mapSpecularExponent",1,"SHORT"),n.MAP_DISSOLVE=new s("mapDissolve",1,"SHORT"),n.ANTI_ALIASING=new s("antiAliasing",1,"UNSIGNED_SHORT"),n.MAP_BUMP=new s("mapBump",1,"SHORT"),n.MAP_DISPLACEMENT=new s("mapDisplacement",1,"SHORT"),n.MAP_DECAL=new s("mapDecal",1,"SHORT"),n.MAP_EMISSIVE=new s("mapEmissive",1,"SHORT")},function(e,exports,t){"use strict";function r(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}function a(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(exports,"__esModule",{value:!0});var n=function(){function e(e,t){for(var r=0;r<t.length;r++){var a=t[r];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}return function(t,r,a){return r&&e(t.prototype,r),a&&e(t,a),t}}(),i=t(0),s=function(){function e(t,n){a(this,e),n=n||{},n.materials=n.materials||{},n.enableWTextureCoord=!!n.enableWTextureCoord,n.indicesPerMaterial=!!n.indicesPerMaterial;var i=this;i.vertices=[],i.vertexNormals=[],i.textures=[],i.indices=[],i.textureStride=n.enableWTextureCoord?3:2,this.name="";var s=[],l=[],o=[],u={},c=[],f={},h=-1,p=0;u.verts=[],u.norms=[],u.textures=[],u.hashindices={},u.indices=[[]],u.materialIndices=[],u.index=0;for(var v=/^v\s/,d=/^vn\s/,y=/^vt\s/,m=/^f\s/,M=/\s+/,b=/^usemtl/,x=t.split("\n"),I=0;I<x.length;I++){var A=x[I].trim();if(A&&!A.startsWith("#")){var _=A.split(M);if(_.shift(),v.test(A))s.push.apply(s,r(_));else if(d.test(A))l.push.apply(l,r(_));else if(y.test(A)){var k=_;_.length>2&&!n.enableWTextureCoord?k=_.slice(0,2):2===_.length&&n.enableWTextureCoord&&k.push(0),o.push.apply(o,r(k))}else if(b.test(A)){var T=_[0];T in f||(c.push(T),f[T]=c.length-1,n.indicesPerMaterial&&f[T]>0&&u.indices.push([])),h=f[T],n.indicesPerMaterial&&(p=h)}else if(m.test(A))for(var w=!1,F=0,S=_.length;F<S;F++){3!==F||w||(F=2,w=!0);var E=_[0]+","+h,g=_[F]+","+h;if(g in u.hashindices)u.indices[p].push(u.hashindices[g]);else{var O=_[F].split("/"),B=O.length-1;if(u.verts.push(+s[3*(O[0]-1)+0]),u.verts.push(+s[3*(O[0]-1)+1]),u.verts.push(+s[3*(O[0]-1)+2]),o.length){var L=n.enableWTextureCoord?3:2;u.textures.push(+o[(O[1]-1)*L+0]),u.textures.push(+o[(O[1]-1)*L+1]),n.enableWTextureCoord&&u.textures.push(+o[(O[1]-1)*L+2])}u.norms.push(+l[3*(O[B]-1)+0]),u.norms.push(+l[3*(O[B]-1)+1]),u.norms.push(+l[3*(O[B]-1)+2]),u.materialIndices.push(h),u.hashindices[g]=u.index,u.indices[p].push(u.hashindices[g]),u.index+=1}3===F&&w&&u.indices[p].push(u.hashindices[E])}}}i.vertices=u.verts,i.vertexNormals=u.norms,i.textures=u.textures,i.vertexMaterialIndices=u.materialIndices,i.indices=n.indicesPerMaterial?u.indices:u.indices[p],i.materialNames=c,i.materialIndices=f,i.materialsByIndex={},n.calcTangentsAndBitangents&&this.calculateTangentsAndBitangents()}return n(e,[{key:"calculateTangentsAndBitangents",value:function(){var e={};e.tangents=[].concat(r(new Array(this.vertices.length))).map(function(e){return 0}),e.bitangents=[].concat(r(new Array(this.vertices.length))).map(function(e){return 0});var t=void 0;t=Array.isArray(this.indices[0])?[].concat.apply([],this.indices):this.indices;for(var a=this.vertices,n=this.vertexNormals,i=this.textures,s=0;s<t.length;s+=3){var l=t[s+0],o=t[s+1],u=t[s+2],c=a[3*l+0],f=a[3*l+1],h=a[3*l+2],p=i[2*l+0],v=i[2*l+1],d=a[3*o+0],y=a[3*o+1],m=a[3*o+2],M=i[2*o+0],b=i[2*o+1],x=a[3*u+0],I=a[3*u+1],A=a[3*u+2],_=i[2*u+0],k=i[2*u+1],T=d-c,w=y-f,F=m-h,S=x-c,E=I-f,g=A-h,O=M-p,B=b-v,L=_-p,N=k-v,R=O*N-B*L,P=1/(Math.abs(R<1e-4)?1:R),D=(T*N-S*B)*P,C=(w*N-E*B)*P,U=(F*N-g*B)*P,j=(S*O-T*L)*P,z=(E*O-w*L)*P,H=(g*O-F*L)*P,W=n[3*l+0],G=n[3*l+1],V=n[3*l+2],K=n[3*o+0],q=n[3*o+1],X=n[3*o+2],Y=n[3*u+0],J=n[3*u+1],Q=n[3*u+2],Z=D*W+C*G+U*V,ee=D*K+C*q+U*X,te=D*Y+C*J+U*Q,re=D-W*Z,ae=C-G*Z,ne=U-V*Z,ie=D-K*ee,se=C-q*ee,le=U-X*ee,oe=D-Y*te,ue=C-J*te,ce=U-Q*te,fe=Math.sqrt(re*re+ae*ae+ne*ne),he=Math.sqrt(ie*ie+se*se+le*le),pe=Math.sqrt(oe*oe+ue*ue+ce*ce),ve=j*W+z*G+H*V,de=j*K+z*q+H*X,ye=j*Y+z*J+H*Q,me=j-W*ve,Me=z-G*ve,be=H-V*ve,xe=j-K*de,Ie=z-q*de,Ae=H-X*de,_e=j-Y*ye,ke=z-J*ye,Te=H-Q*ye,we=Math.sqrt(me*me+Me*Me+be*be),Fe=Math.sqrt(xe*xe+Ie*Ie+Ae*Ae),Se=Math.sqrt(_e*_e+ke*ke+Te*Te);e.tangents[3*l+0]+=re/fe,e.tangents[3*l+1]+=ae/fe,e.tangents[3*l+2]+=ne/fe,e.tangents[3*o+0]+=ie/he,e.tangents[3*o+1]+=se/he,e.tangents[3*o+2]+=le/he,e.tangents[3*u+0]+=oe/pe,e.tangents[3*u+1]+=ue/pe,e.tangents[3*u+2]+=ce/pe,e.bitangents[3*l+0]+=me/we,e.bitangents[3*l+1]+=Me/we,e.bitangents[3*l+2]+=be/we,e.bitangents[3*o+0]+=xe/Fe,e.bitangents[3*o+1]+=Ie/Fe,e.bitangents[3*o+2]+=Ae/Fe,e.bitangents[3*u+0]+=_e/Se,e.bitangents[3*u+1]+=ke/Se,e.bitangents[3*u+2]+=Te/Se}this.tangents=e.tangents,this.bitangents=e.bitangents}},{key:"makeBufferData",value:function(e){var t=this.vertices.length/3,r=new ArrayBuffer(e.stride*t);r.numItems=t;for(var a=new DataView(r),n=0,s=0;n<t;n++){s=n*e.stride;var l=!0,o=!1,u=void 0;try{for(var c,f=e.attributes[Symbol.iterator]();!(l=(c=f.next()).done);l=!0){var h=c.value,p=s+e[h.key].offset;switch(h.key){case i.Layout.POSITION.key:a.setFloat32(p,this.vertices[3*n],!0),a.setFloat32(p+4,this.vertices[3*n+1],!0),a.setFloat32(p+8,this.vertices[3*n+2],!0);break;case i.Layout.UV.key:a.setFloat32(p,this.textures[2*n],!0),a.setFloat32(p+4,this.vertices[2*n+1],!0);break;case i.Layout.NORMAL.key:a.setFloat32(p,this.vertexNormals[3*n],!0),a.setFloat32(p+4,this.vertexNormals[3*n+1],!0),a.setFloat32(p+8,this.vertexNormals[3*n+2],!0);break;case i.Layout.MATERIAL_INDEX.key:a.setInt16(p,this.vertexMaterialIndices[n],!0);break;case i.Layout.AMBIENT.key:var v=this.vertexMaterialIndices[n],d=this.materialsByIndex[v];if(!d)break;a.setFloat32(p,d.ambient[0],!0),a.setFloat32(p+4,d.ambient[1],!0),a.setFloat32(p+8,d.ambient[2],!0);break;case i.Layout.DIFFUSE.key:var y=this.vertexMaterialIndices[n],m=this.materialsByIndex[y];if(!m)break;a.setFloat32(p,m.diffuse[0],!0),a.setFloat32(p+4,m.diffuse[1],!0),a.setFloat32(p+8,m.diffuse[2],!0);break;case i.Layout.SPECULAR.key:var M=this.vertexMaterialIndices[n],b=this.materialsByIndex[M];if(!b)break;a.setFloat32(p,b.specular[0],!0),a.setFloat32(p+4,b.specular[1],!0),a.setFloat32(p+8,b.specular[2],!0);break;case i.Layout.SPECULAR_EXPONENT.key:var x=this.vertexMaterialIndices[n],I=this.materialsByIndex[x];if(!I)break;a.setFloat32(p,I.specularExponent,!0);break;case i.Layout.EMISSIVE.key:var A=this.vertexMaterialIndices[n],_=this.materialsByIndex[A];if(!_)break;a.setFloat32(p,_.emissive[0],!0),a.setFloat32(p+4,_.emissive[1],!0),a.setFloat32(p+8,_.emissive[2],!0);break;case i.Layout.TRANSMISSION_FILTER.key:var k=this.vertexMaterialIndices[n],T=this.materialsByIndex[k];if(!T)break;a.setFloat32(p,T.transmissionFilter[0],!0),a.setFloat32(p+4,T.transmissionFilter[1],!0),a.setFloat32(p+8,T.transmissionFilter[2],!0);break;case i.Layout.DISSOLVE.key:var w=this.vertexMaterialIndices[n],F=this.materialsByIndex[w];if(!F)break;a.setFloat32(p,F.dissolve,!0);break;case i.Layout.ILLUMINATION.key:var S=this.vertexMaterialIndices[n],E=this.materialsByIndex[S];if(!E)break;a.setInt16(p,E.illumination,!0);break;case i.Layout.REFRACTION_INDEX.key:var g=this.vertexMaterialIndices[n],O=this.materialsByIndex[g];if(!O)break;a.setFloat32(p,O.refractionIndex,!0);break;case i.Layout.SHARPNESS.key:var B=this.vertexMaterialIndices[n],L=this.materialsByIndex[B];if(!L)break;a.setFloat32(p,L.sharpness,!0);break;case i.Layout.ANTI_ALIASING.key:var N=this.vertexMaterialIndices[n],R=this.materialsByIndex[N];if(!R)break;a.setInt16(p,R.antiAliasing,!0)}}}catch(e){o=!0,u=e}finally{try{!l&&f.return&&f.return()}finally{if(o)throw u}}}return r}},{key:"makeIndexBufferData",value:function(){var e=new Uint16Array(this.indices);return e.numItems=this.indices.length,e}},{key:"addMaterialLibrary",value:function(e){for(var t in e.materials)if(t in this.materialIndices){var r=e.materials[t],a=this.materialIndices[r.name];this.materialsByIndex[a]=r}}}]),e}();exports.default=s},function(e,exports,t){"use strict";function r(e){return Array.isArray(e)?e:Array.from(e)}function a(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(exports,"__esModule",{value:!0});var n=function(){function e(e,t){for(var r=0;r<t.length;r++){var a=t[r];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}return function(t,r,a){return r&&e(t.prototype,r),a&&e(t,a),t}}(),i=exports.Material=function e(t){a(this,e),this.name=t,this.ambient=[0,0,0],this.diffuse=[0,0,0],this.specular=[0,0,0],this.emissive=[0,0,0],this.transmissionFilter=[0,0,0],this.dissolve=0,this.specularExponent=0,this.transparency=0,this.illumination=0,this.refractionIndex=1,this.sharpness=0,this.mapDiffuse=null,this.mapAmbient=null,this.mapSpecular=null,this.mapSpecularExponent=null,this.mapDissolve=null,this.antiAliasing=!1,this.mapBump=null,this.mapDisplacement=null,this.mapDecal=null,this.mapEmissive=null,this.mapReflections=[]};exports.MaterialLibrary=function(){function e(t){a(this,e),this.data=t,this.currentMaterial=null,this.materials={},this.parse()}return n(e,[{key:"parse_newmtl",value:function(e){var t=e[0];this.currentMaterial=new i(t),this.materials[t]=this.currentMaterial}},{key:"parseColor",value:function(e){if("spectral"!=e[0]&&"xyz"!=e[0]){if(3==e.length)return e.map(parseFloat);var t=parseFloat(e[0]);return[t,t,t]}}},{key:"parse_Ka",value:function(e){this.currentMaterial.ambient=this.parseColor(e)}},{key:"parse_Kd",value:function(e){this.currentMaterial.diffuse=this.parseColor(e)}},{key:"parse_Ks",value:function(e){this.currentMaterial.specular=this.parseColor(e)}},{key:"parse_Ke",value:function(e){this.currentMaterial.emissive=this.parseColor(e)}},{key:"parse_Tf",value:function(e){this.currentMaterial.transmissionFilter=this.parseColor(e)}},{key:"parse_d",value:function(e){this.currentMaterial.dissolve=parseFloat(e.pop())}},{key:"parse_illum",value:function(e){this.currentMaterial.illumination=parseInt(e[0])}},{key:"parse_Ni",value:function(e){this.currentMaterial.refractionIndex=parseFloat(e[0])}},{key:"parse_Ns",value:function(e){this.currentMaterial.specularExponent=parseInt(e[0])}},{key:"parse_sharpness",value:function(e){this.currentMaterial.sharpness=parseInt(e[0])}},{key:"parse_cc",value:function(e,t){t.colorCorrection="on"==e[0]}},{key:"parse_blendu",value:function(e,t){t.horizontalBlending="on"==e[0]}},{key:"parse_blendv",value:function(e,t){t.verticalBlending="on"==e[0]}},{key:"parse_boost",value:function(e,t){t.boostMipMapSharpness=parseFloat(e[0])}},{key:"parse_mm",value:function(e,t){t.modifyTextureMap.brightness=parseFloat(e[0]),t.modifyTextureMap.contrast=parseFloat(e[1])}},{key:"parse_ost",value:function(e,t,r){for(;e.length<3;)e.push(r);t.u=parseFloat(e[0]),t.v=parseFloat(e[1]),t.w=parseFloat(e[2])}},{key:"parse_o",value:function(e,t){this.parse_ost(e,t.offset,0)}},{key:"parse_s",value:function(e,t){this.parse_ost(e,t.scale,1)}},{key:"parse_t",value:function(e,t){this.parse_ost(e,t.turbulence,0)}},{key:"parse_texres",value:function(e,t){t.textureResolution=parseFloat(e[0])}},{key:"parse_clamp",value:function(e,t){t.clamp="on"==e[0]}},{key:"parse_bm",value:function(e,t){t.bumpMultiplier=parseFloat(e[0])}},{key:"parse_imfchan",value:function(e,t){t.imfChan=e[0]}},{key:"parse_type",value:function(e,t){t.reflectionType=e[0]}},{key:"parseOptions",value:function(e){var t={colorCorrection:!1,horizontalBlending:!0,verticalBlending:!0,boostMipMapSharpness:0,modifyTextureMap:{brightness:0,contrast:1},offset:{u:0,v:0,w:0},scale:{u:1,v:1,w:1},turbulence:{u:0,v:0,w:0},clamp:!1,textureResolution:null,bumpMultiplier:1,imfChan:null},r=void 0,a=void 0,n={};for(e.reverse();e.length;){var i=e.pop();i.startsWith("-")?(r=i.substr(1),n[r]=[]):n[r].push(i)}for(r in n)if(n.hasOwnProperty(r)){a=n[r];var s=this["parse_"+r];s&&s.bind(this)(a,t)}return t}},{key:"parseMap",value:function(e){var t=void 0,a=void 0;if(e[0].startsWith("-"))t=e.pop(),a=e;else{var n=r(e);t=n[0],a=n.slice(1)}return a=this.parseOptions(a),a.filename=t,a}},{key:"parse_map_Ka",value:function(e){this.currentMaterial.mapAmbient=this.parseMap(e)}},{key:"parse_map_Kd",value:function(e){this.currentMaterial.mapDiffuse=this.parseMap(e)}},{key:"parse_map_Ks",value:function(e){this.currentMaterial.mapSpecular=this.parseMap(e)}},{key:"parse_map_Ke",value:function(e){this.currentMaterial.mapEmissive=this.parseMap(e)}},{key:"parse_map_Ns",value:function(e){this.currentMaterial.mapSpecularExponent=this.parseMap(e)}},{key:"parse_map_d",value:function(e){this.currentMaterial.mapDissolve=this.parseMap(e)}},{key:"parse_map_aat",value:function(e){this.currentMaterial.antiAliasing="on"==e[0]}},{key:"parse_map_bump",value:function(e){this.currentMaterial.mapBump=this.parseMap(e)}},{key:"parse_bump",value:function(e){this.parse_map_bump(e)}},{key:"parse_disp",value:function(e){this.currentMaterial.mapDisplacement=this.parseMap(e)}},{key:"parse_decal",value:function(e){this.currentMaterial.mapDecal=this.parseMap(e)}},{key:"parse_refl",value:function(e){this.currentMaterial.mapReflections.push(this.parseMap(e))}},{key:"parse",value:function(){var e=this.data.split(/\r?\n/),t=!0,a=!1,n=void 0;try{for(var i,s=e[Symbol.iterator]();!(t=(i=s.next()).done);t=!0){var l=i.value;if((l=l.trim())&&!l.startsWith("#")){var o=l.split(/\s/),u=void 0,c=o,f=r(c);u=f[0],o=f.slice(1);var h=this["parse_"+u];h&&h.bind(this)(o)}}}catch(e){a=!0,n=e}finally{try{!t&&s.return&&s.return()}finally{if(a)throw n}}delete this.data,this.currentMaterial=null}}]),e}()},function(e,exports,t){e.exports=t(4)},function(e,exports,t){"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.version=exports.deleteMeshBuffers=exports.initMeshBuffers=exports.downloadMeshes=exports.downloadModels=exports.Layout=exports.MaterialLibrary=exports.Material=exports.Mesh=void 0;var r=t(1),a=function(e){return e&&e.__esModule?e:{default:e}}(r),n=t(2),i=t(0),s=t(5);exports.Mesh=a.default,exports.Material=n.Material,exports.MaterialLibrary=n.MaterialLibrary,exports.Layout=i.Layout,exports.downloadModels=s.downloadModels,exports.downloadMeshes=s.downloadMeshes,exports.initMeshBuffers=s.initMeshBuffers,exports.deleteMeshBuffers=s.deleteMeshBuffers,exports.version="1.1.3"},function(e,exports,t){"use strict";function r(e,t){var r=["mapDiffuse","mapAmbient","mapSpecular","mapDissolve","mapBump","mapDisplacement","mapDecal","mapEmissive"];t.endsWith("/")||(t+="/");var a=[];for(var n in e.materials)if(e.materials.hasOwnProperty(n)){n=e.materials[n];var i=!0,s=!1,l=void 0;try{for(var o,u=r[Symbol.iterator]();!(i=(o=u.next()).done);i=!0){var c=o.value;(function(e){var r=n[e];if(!r)return"continue";var i=t+r.filename;a.push(fetch(i).then(function(e){if(!e.ok)throw new Error;return e.blob()}).then(function(e){var t=new Image;return t.src=URL.createObjectURL(e),r.texture=t,new Promise(function(e){return t.onload=e})}).catch(function(){}))})(c)}}catch(e){s=!0,l=e}finally{try{!i&&u.return&&u.return()}finally{if(s)throw l}}}return Promise.all(a)}function a(e){var t=[],a=!0,n=!1,i=void 0;try{for(var s,o=e[Symbol.iterator]();!(a=(s=o.next()).done);a=!0){var f=s.value;!function(e){var a=[];if(!e.obj)throw new Error('"obj" attribute of model object not set. The .obj file is required to be set in order to use downloadModels()');var n={};n.indicesPerMaterial=!!e.indicesPerMaterial,n.calcTangentsAndBitangents=!!e.calcTangentsAndBitangents;var i=e.name;if(!i){var s=e.obj.split("/");i=s[s.length-1].replace(".obj","")}if(a.push(Promise.resolve(i)),a.push(fetch(e.obj).then(function(e){return e.text()}).then(function(e){return new u.default(e,n)})),e.mtl){var l=e.mtl;"boolean"==typeof l&&(l=e.obj.replace(/\.obj$/,".mtl")),a.push(fetch(l).then(function(e){return e.text()}).then(function(t){var a=new c.MaterialLibrary(t);if(!1!==e.downloadMtlTextures){var n=e.mtlTextureRoot;return n||(n=l.substr(0,l.lastIndexOf("/"))),Promise.all([Promise.resolve(a),r(a,n)])}return Promise.all(Promise.resolve(a))}).then(function(e){return e[0]}))}t.push(Promise.all(a))}(f)}}catch(e){n=!0,i=e}finally{try{!a&&o.return&&o.return()}finally{if(n)throw i}}return Promise.all(t).then(function(e){var t={},r=!0,a=!1,n=void 0;try{for(var i,s=e[Symbol.iterator]();!(r=(i=s.next()).done);r=!0){var o=i.value,u=l(o,3),c=u[0],f=u[1],h=u[2];f.name=c,h&&f.addMaterialLibrary(h),t[c]=f}}catch(e){a=!0,n=e}finally{try{!r&&s.return&&s.return()}finally{if(a)throw n}}return t})}function n(e,t,r){void 0===r&&(r={});var a=[];for(var n in e){(function(t){if(!e.hasOwnProperty(t))return"continue";var r=e[t];a.push(fetch(r).then(function(e){return e.text()}).then(function(e){return[t,new u.default(e)]}))})(n)}Promise.all(a).then(function(e){var a=!0,n=!1,i=void 0;try{for(var s,o=e[Symbol.iterator]();!(a=(s=o.next()).done);a=!0){var u=s.value,c=l(u,2),f=c[0],h=c[1];r[f]=h}}catch(e){n=!0,i=e}finally{try{!a&&o.return&&o.return()}finally{if(n)throw i}}return t(r)})}function i(e,t){t.normalBuffer=f(e,e.ARRAY_BUFFER,t.vertexNormals,3),t.textureBuffer=f(e,e.ARRAY_BUFFER,t.textures,t.textureStride),t.vertexBuffer=f(e,e.ARRAY_BUFFER,t.vertices,3),t.indexBuffer=f(e,e.ELEMENT_ARRAY_BUFFER,t.indices,1)}function s(e,t){e.deleteBuffer(t.normalBuffer),e.deleteBuffer(t.textureBuffer),e.deleteBuffer(t.vertexBuffer),e.deleteBuffer(t.indexBuffer)}Object.defineProperty(exports,"__esModule",{value:!0});var l=function(){function e(e,t){var r=[],a=!0,n=!1,i=void 0;try{for(var s,l=e[Symbol.iterator]();!(a=(s=l.next()).done)&&(r.push(s.value),!t||r.length!==t);a=!0);}catch(e){n=!0,i=e}finally{try{!a&&l.return&&l.return()}finally{if(n)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}();exports.downloadModels=a,exports.downloadMeshes=n,exports.initMeshBuffers=i,exports.deleteMeshBuffers=s;var o=t(1),u=function(e){return e&&e.__esModule?e:{default:e}}(o),c=t(2),f=(t(0),function(e,t,r,a){var n=e.createBuffer(),i=t===e.ARRAY_BUFFER?Float32Array:Uint16Array;return e.bindBuffer(t,n),e.bufferData(t,new i(r),e.STATIC_DRAW),n.itemSize=a,n.numItems=r.length/a,n})}])});
 
 /***/ }),
 /* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+let cylinderObjStr = `# This file uses centimeters as units for non-parametric coordinates.
+
+mtllib cylinder2.mtl
+g default
+v 0.951057 -1.464235 -0.309017
+v 0.809018 -1.464235 -0.587786
+v 0.587786 -1.464235 -0.809017
+v 0.309017 -1.464235 -0.951057
+v 0.000000 -1.464235 -1.000000
+v -0.309017 -1.464235 -0.951057
+v -0.587785 -1.464235 -0.809017
+v -0.809017 -1.464235 -0.587785
+v -0.951057 -1.464235 -0.309017
+v -1.000000 -1.464235 0.000000
+v -0.951057 -1.464235 0.309017
+v -0.809017 -1.464235 0.587785
+v -0.587785 -1.464235 0.809017
+v -0.309017 -1.464235 0.951057
+v -0.000000 -1.464235 1.000000
+v 0.309017 -1.464235 0.951057
+v 0.587785 -1.464235 0.809017
+v 0.809017 -1.464235 0.587785
+v 0.951057 -1.464235 0.309017
+v 1.000000 -1.464235 0.000000
+v 0.951057 1.464235 -0.309017
+v 0.809018 1.464235 -0.587786
+v 0.587786 1.464235 -0.809017
+v 0.309017 1.464235 -0.951057
+v 0.000000 1.464235 -1.000000
+v -0.309017 1.464235 -0.951057
+v -0.587785 1.464235 -0.809017
+v -0.809017 1.464235 -0.587785
+v -0.951057 1.464235 -0.309017
+v -1.000000 1.464235 0.000000
+v -0.951057 1.464235 0.309017
+v -0.809017 1.464235 0.587785
+v -0.587785 1.464235 0.809017
+v -0.309017 1.464235 0.951057
+v -0.000000 1.464235 1.000000
+v 0.309017 1.464235 0.951057
+v 0.587785 1.464235 0.809017
+v 0.809017 1.464235 0.587785
+v 0.951057 1.464235 0.309017
+v 1.000000 1.464235 0.000000
+v 0.000000 -1.464235 0.000000
+v 0.000000 1.464235 0.000000
+vt 0.648603 0.107966
+vt 0.626409 0.064408
+vt 0.591842 0.029841
+vt 0.548284 0.007647
+vt 0.500000 -0.000000
+vt 0.451716 0.007647
+vt 0.408159 0.029841
+vt 0.373591 0.064409
+vt 0.351397 0.107966
+vt 0.343750 0.156250
+vt 0.351397 0.204534
+vt 0.373591 0.248091
+vt 0.408159 0.282659
+vt 0.451716 0.304853
+vt 0.500000 0.312500
+vt 0.548284 0.304853
+vt 0.591841 0.282659
+vt 0.626409 0.248091
+vt 0.648603 0.204534
+vt 0.656250 0.156250
+vt 0.375000 0.312500
+vt 0.387500 0.312500
+vt 0.400000 0.312500
+vt 0.412500 0.312500
+vt 0.425000 0.312500
+vt 0.437500 0.312500
+vt 0.450000 0.312500
+vt 0.462500 0.312500
+vt 0.475000 0.312500
+vt 0.487500 0.312500
+vt 0.500000 0.312500
+vt 0.512500 0.312500
+vt 0.525000 0.312500
+vt 0.537500 0.312500
+vt 0.550000 0.312500
+vt 0.562500 0.312500
+vt 0.575000 0.312500
+vt 0.587500 0.312500
+vt 0.600000 0.312500
+vt 0.612500 0.312500
+vt 0.625000 0.312500
+vt 0.375000 0.688440
+vt 0.387500 0.688440
+vt 0.400000 0.688440
+vt 0.412500 0.688440
+vt 0.425000 0.688440
+vt 0.437500 0.688440
+vt 0.450000 0.688440
+vt 0.462500 0.688440
+vt 0.475000 0.688440
+vt 0.487500 0.688440
+vt 0.500000 0.688440
+vt 0.512500 0.688440
+vt 0.525000 0.688440
+vt 0.537500 0.688440
+vt 0.550000 0.688440
+vt 0.562500 0.688440
+vt 0.575000 0.688440
+vt 0.587500 0.688440
+vt 0.600000 0.688440
+vt 0.612500 0.688440
+vt 0.625000 0.688440
+vt 0.648603 0.795466
+vt 0.626409 0.751908
+vt 0.591842 0.717341
+vt 0.548284 0.695147
+vt 0.500000 0.687500
+vt 0.451716 0.695147
+vt 0.408159 0.717341
+vt 0.373591 0.751909
+vt 0.351397 0.795466
+vt 0.343750 0.843750
+vt 0.351397 0.892034
+vt 0.373591 0.935591
+vt 0.408159 0.970159
+vt 0.451716 0.992353
+vt 0.500000 1.000000
+vt 0.548284 0.992353
+vt 0.591841 0.970159
+vt 0.626409 0.935591
+vt 0.648603 0.892034
+vt 0.656250 0.843750
+vt 0.500000 0.150000
+vt 0.500000 0.837500
+vn 0.951057 0.000000 -0.309016
+vn 0.809017 0.000000 -0.587785
+vn 0.809017 0.000000 -0.587785
+vn 0.951057 0.000000 -0.309016
+vn 0.587785 0.000000 -0.809017
+vn 0.587785 0.000000 -0.809017
+vn 0.309017 0.000000 -0.951057
+vn 0.309017 0.000000 -0.951057
+vn -0.000000 0.000000 -1.000000
+vn -0.000000 0.000000 -1.000000
+vn -0.309017 0.000000 -0.951056
+vn -0.309017 0.000000 -0.951056
+vn -0.587785 0.000000 -0.809017
+vn -0.587785 0.000000 -0.809017
+vn -0.809017 0.000000 -0.587785
+vn -0.809017 0.000000 -0.587785
+vn -0.951057 0.000000 -0.309017
+vn -0.951057 0.000000 -0.309017
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -0.951057 0.000000 0.309017
+vn -0.951057 0.000000 0.309017
+vn -0.809017 0.000000 0.587785
+vn -0.809017 0.000000 0.587785
+vn -0.587785 0.000000 0.809017
+vn -0.587785 0.000000 0.809017
+vn -0.309017 0.000000 0.951057
+vn -0.309017 0.000000 0.951057
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.309017 0.000000 0.951057
+vn 0.309017 0.000000 0.951057
+vn 0.587785 0.000000 0.809017
+vn 0.587785 0.000000 0.809017
+vn 0.809017 0.000000 0.587785
+vn 0.809017 0.000000 0.587785
+vn 0.951057 0.000000 0.309017
+vn 0.951057 0.000000 0.309017
+vn 1.000000 0.000000 0.000001
+vn 1.000000 0.000000 0.000001
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+s 1
+g pCylinder1
+usemtl initialShadingGroup
+f 1/21/1 2/22/2 22/43/3 21/42/4
+f 2/22/2 3/23/5 23/44/6 22/43/3
+f 3/23/5 4/24/7 24/45/8 23/44/6
+f 4/24/7 5/25/9 25/46/10 24/45/8
+f 5/25/9 6/26/11 26/47/12 25/46/10
+f 6/26/11 7/27/13 27/48/14 26/47/12
+f 7/27/13 8/28/15 28/49/16 27/48/14
+f 8/28/15 9/29/17 29/50/18 28/49/16
+f 9/29/17 10/30/19 30/51/20 29/50/18
+f 10/30/19 11/31/21 31/52/22 30/51/20
+f 11/31/21 12/32/23 32/53/24 31/52/22
+f 12/32/23 13/33/25 33/54/26 32/53/24
+f 13/33/25 14/34/27 34/55/28 33/54/26
+f 14/34/27 15/35/29 35/56/30 34/55/28
+f 15/35/29 16/36/31 36/57/32 35/56/30
+f 16/36/31 17/37/33 37/58/34 36/57/32
+f 17/37/33 18/38/35 38/59/36 37/58/34
+f 18/38/35 19/39/37 39/60/38 38/59/36
+f 19/39/37 20/40/39 40/61/40 39/60/38
+f 20/40/39 1/41/1 21/62/4 40/61/40
+s 2
+f 2/2/41 1/1/42 41/83/43
+f 3/3/44 2/2/41 41/83/43
+f 4/4/45 3/3/44 41/83/43
+f 5/5/46 4/4/45 41/83/43
+f 6/6/47 5/5/46 41/83/43
+f 7/7/48 6/6/47 41/83/43
+f 8/8/49 7/7/48 41/83/43
+f 9/9/50 8/8/49 41/83/43
+f 10/10/51 9/9/50 41/83/43
+f 11/11/52 10/10/51 41/83/43
+f 12/12/53 11/11/52 41/83/43
+f 13/13/54 12/12/53 41/83/43
+f 14/14/55 13/13/54 41/83/43
+f 15/15/56 14/14/55 41/83/43
+f 16/16/57 15/15/56 41/83/43
+f 17/17/58 16/16/57 41/83/43
+f 18/18/59 17/17/58 41/83/43
+f 19/19/60 18/18/59 41/83/43
+f 20/20/61 19/19/60 41/83/43
+f 1/1/42 20/20/61 41/83/43
+s 3
+f 21/81/6# This file uses centimeters as units for non-parametric coordinates.
+
+mtllib cylinder3.mtl
+g default
+v 0.582822 -1.924578 -0.189370
+v 0.495778 -1.924578 -0.360204
+v 0.360204 -1.924578 -0.495778
+v 0.189370 -1.924578 -0.582822
+v 0.000000 -1.924578 -0.612816
+v -0.189370 -1.924578 -0.582822
+v -0.360204 -1.924578 -0.495778
+v -0.495778 -1.924578 -0.360204
+v -0.582822 -1.924578 -0.189370
+v -0.612815 -1.924578 0.000000
+v -0.582822 -1.924578 0.189370
+v -0.495778 -1.924578 0.360204
+v -0.360204 -1.924578 0.495778
+v -0.189370 -1.924578 0.582822
+v -0.000000 -1.924578 0.612815
+v 0.189370 -1.924578 0.582822
+v 0.360204 -1.924578 0.495778
+v 0.495778 -1.924578 0.360204
+v 0.582822 -1.924578 0.189370
+v 0.612815 -1.924578 0.000000
+v 0.582822 1.924578 -0.189370
+v 0.495778 1.924578 -0.360204
+v 0.360204 1.924578 -0.495778
+v 0.189370 1.924578 -0.582822
+v 0.000000 1.924578 -0.612816
+v -0.189370 1.924578 -0.582822
+v -0.360204 1.924578 -0.495778
+v -0.495778 1.924578 -0.360204
+v -0.582822 1.924578 -0.189370
+v -0.612815 1.924578 0.000000
+v -0.582822 1.924578 0.189370
+v -0.495778 1.924578 0.360204
+v -0.360204 1.924578 0.495778
+v -0.189370 1.924578 0.582822
+v -0.000000 1.924578 0.612815
+v 0.189370 1.924578 0.582822
+v 0.360204 1.924578 0.495778
+v 0.495778 1.924578 0.360204
+v 0.582822 1.924578 0.189370
+v 0.612815 1.924578 0.000000
+v 0.000000 -1.924578 0.000000
+v 0.000000 1.924578 0.000000
+vt 0.648603 0.107966
+vt 0.626409 0.064408
+vt 0.591842 0.029841
+vt 0.548284 0.007647
+vt 0.500000 -0.000000
+vt 0.451716 0.007647
+vt 0.408159 0.029841
+vt 0.373591 0.064409
+vt 0.351397 0.107966
+vt 0.343750 0.156250
+vt 0.351397 0.204534
+vt 0.373591 0.248091
+vt 0.408159 0.282659
+vt 0.451716 0.304853
+vt 0.500000 0.312500
+vt 0.548284 0.304853
+vt 0.591841 0.282659
+vt 0.626409 0.248091
+vt 0.648603 0.204534
+vt 0.656250 0.156250
+vt 0.375000 0.312500
+vt 0.387500 0.312500
+vt 0.400000 0.312500
+vt 0.412500 0.312500
+vt 0.425000 0.312500
+vt 0.437500 0.312500
+vt 0.450000 0.312500
+vt 0.462500 0.312500
+vt 0.475000 0.312500
+vt 0.487500 0.312500
+vt 0.500000 0.312500
+vt 0.512500 0.312500
+vt 0.525000 0.312500
+vt 0.537500 0.312500
+vt 0.550000 0.312500
+vt 0.562500 0.312500
+vt 0.575000 0.312500
+vt 0.587500 0.312500
+vt 0.600000 0.312500
+vt 0.612500 0.312500
+vt 0.625000 0.312500
+vt 0.375000 0.688440
+vt 0.387500 0.688440
+vt 0.400000 0.688440
+vt 0.412500 0.688440
+vt 0.425000 0.688440
+vt 0.437500 0.688440
+vt 0.450000 0.688440
+vt 0.462500 0.688440
+vt 0.475000 0.688440
+vt 0.487500 0.688440
+vt 0.500000 0.688440
+vt 0.512500 0.688440
+vt 0.525000 0.688440
+vt 0.537500 0.688440
+vt 0.550000 0.688440
+vt 0.562500 0.688440
+vt 0.575000 0.688440
+vt 0.587500 0.688440
+vt 0.600000 0.688440
+vt 0.612500 0.688440
+vt 0.625000 0.688440
+vt 0.648603 0.795466
+vt 0.626409 0.751908
+vt 0.591842 0.717341
+vt 0.548284 0.695147
+vt 0.500000 0.687500
+vt 0.451716 0.695147
+vt 0.408159 0.717341
+vt 0.373591 0.751909
+vt 0.351397 0.795466
+vt 0.343750 0.843750
+vt 0.351397 0.892034
+vt 0.373591 0.935591
+vt 0.408159 0.970159
+vt 0.451716 0.992353
+vt 0.500000 1.000000
+vt 0.548284 0.992353
+vt 0.591841 0.970159
+vt 0.626409 0.935591
+vt 0.648603 0.892034
+vt 0.656250 0.843750
+vt 0.500000 0.150000
+vt 0.500000 0.837500
+vn 0.951057 0.000000 -0.309016
+vn 0.809017 0.000000 -0.587785
+vn 0.809017 0.000000 -0.587785
+vn 0.951057 0.000000 -0.309016
+vn 0.587785 0.000000 -0.809017
+vn 0.587785 0.000000 -0.809017
+vn 0.309017 0.000000 -0.951057
+vn 0.309017 0.000000 -0.951057
+vn -0.000000 0.000000 -1.000000
+vn -0.000000 0.000000 -1.000000
+vn -0.309017 0.000000 -0.951057
+vn -0.309017 0.000000 -0.951057
+vn -0.587785 0.000000 -0.809017
+vn -0.587785 0.000000 -0.809017
+vn -0.809017 0.000000 -0.587785
+vn -0.809017 0.000000 -0.587785
+vn -0.951057 0.000000 -0.309017
+vn -0.951057 0.000000 -0.309017
+vn -1.000000 0.000000 0.000000
+vn -1.000000 0.000000 0.000000
+vn -0.951057 0.000000 0.309017
+vn -0.951057 0.000000 0.309017
+vn -0.809017 0.000000 0.587785
+vn -0.809017 0.000000 0.587785
+vn -0.587785 0.000000 0.809017
+vn -0.587785 0.000000 0.809017
+vn -0.309017 0.000000 0.951057
+vn -0.309017 0.000000 0.951057
+vn 0.000000 0.000000 1.000000
+vn 0.000000 0.000000 1.000000
+vn 0.309017 0.000000 0.951057
+vn 0.309017 0.000000 0.951057
+vn 0.587785 0.000000 0.809017
+vn 0.587785 0.000000 0.809017
+vn 0.809017 0.000000 0.587785
+vn 0.809017 0.000000 0.587785
+vn 0.951057 0.000000 0.309017
+vn 0.951057 0.000000 0.309017
+vn 1.000000 0.000000 0.000001
+vn 1.000000 0.000000 0.000001
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+s 1
+g pCylinder1
+usemtl initialShadingGroup
+f 1/21/1 2/22/2 22/43/3 21/42/4
+f 2/22/2 3/23/5 23/44/6 22/43/3
+f 3/23/5 4/24/7 24/45/8 23/44/6
+f 4/24/7 5/25/9 25/46/10 24/45/8
+f 5/25/9 6/26/11 26/47/12 25/46/10
+f 6/26/11 7/27/13 27/48/14 26/47/12
+f 7/27/13 8/28/15 28/49/16 27/48/14
+f 8/28/15 9/29/17 29/50/18 28/49/16
+f 9/29/17 10/30/19 30/51/20 29/50/18
+f 10/30/19 11/31/21 31/52/22 30/51/20
+f 11/31/21 12/32/23 32/53/24 31/52/22
+f 12/32/23 13/33/25 33/54/26 32/53/24
+f 13/33/25 14/34/27 34/55/28 33/54/26
+f 14/34/27 15/35/29 35/56/30 34/55/28
+f 15/35/29 16/36/31 36/57/32 35/56/30
+f 16/36/31 17/37/33 37/58/34 36/57/32
+f 17/37/33 18/38/35 38/59/36 37/58/34
+f 18/38/35 19/39/37 39/60/38 38/59/36
+f 19/39/37 20/40/39 40/61/40 39/60/38
+f 20/40/39 1/41/1 21/62/4 40/61/40
+s 2
+f 2/2/41 1/1/42 41/83/43
+f 3/3/44 2/2/41 41/83/43
+f 4/4/45 3/3/44 41/83/43
+f 5/5/46 4/4/45 41/83/43
+f 6/6/47 5/5/46 41/83/43
+f 7/7/48 6/6/47 41/83/43
+f 8/8/49 7/7/48 41/83/43
+f 9/9/50 8/8/49 41/83/43
+f 10/10/51 9/9/50 41/83/43
+f 11/11/52 10/10/51 41/83/43
+f 12/12/53 11/11/52 41/83/43
+f 13/13/54 12/12/53 41/83/43
+f 14/14/55 13/13/54 41/83/43
+f 15/15/56 14/14/55 41/83/43
+f 16/16/57 15/15/56 41/83/43
+f 17/17/58 16/16/57 41/83/43
+f 18/18/59 17/17/58 41/83/43
+f 19/19/60 18/18/59 41/83/43
+f 20/20/61 19/19/60 41/83/43
+f 1/1/42 20/20/61 41/83/43
+s 3
+f 21/81/62 22/80/63 42/84/64
+f 22/80/63 23/79/65 42/84/64
+f 23/79/65 24/78/66 42/84/64
+f 24/78/66 25/77/67 42/84/64
+f 25/77/67 26/76/68 42/84/64
+f 26/76/68 27/75/69 42/84/64
+f 27/75/69 28/74/70 42/84/64
+f 28/74/70 29/73/71 42/84/64
+f 29/73/71 30/72/72 42/84/64
+f 30/72/72 31/71/73 42/84/64
+f 31/71/73 32/70/74 42/84/64
+f 32/70/74 33/69/75 42/84/64
+f 33/69/75 34/68/76 42/84/64
+f 34/68/76 35/67/77 42/84/64
+f 35/67/77 36/66/78 42/84/64
+f 36/66/78 37/65/79 42/84/64
+f 37/65/79 38/64/80 42/84/64
+f 38/64/80 39/63/81 42/84/64
+f 39/63/81 40/82/82 42/84/64
+f 40/82/82 21/81/62 42/84/64
+2 22/80/63 42/84/64
+f 22/80/63 23/79/65 42/84/64
+f 23/79/65 24/78/66 42/84/64
+f 24/78/66 25/77/67 42/84/64
+f 25/77/67 26/76/68 42/84/64
+f 26/76/68 27/75/69 42/84/64
+f 27/75/69 28/74/70 42/84/64
+f 28/74/70 29/73/71 42/84/64
+f 29/73/71 30/72/72 42/84/64
+f 30/72/72 31/71/73 42/84/64
+f 31/71/73 32/70/74 42/84/64
+f 32/70/74 33/69/75 42/84/64
+f 33/69/75 34/68/76 42/84/64
+f 34/68/76 35/67/77 42/84/64
+f 35/67/77 36/66/78 42/84/64
+f 36/66/78 37/65/79 42/84/64
+f 37/65/79 38/64/80 42/84/64
+f 38/64/80 39/63/81 42/84/64
+f 39/63/81 40/82/82 42/84/64
+f 40/82/82 21/81/62 42/84/64
+`;
+/* harmony default export */ __webpack_exports__["a"] = (cylinderObjStr);
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Turtle__ = __webpack_require__(73);
+
+
+// import ExpansionRule from './ExpansionRule'
+// import DrawingRule from './DrawingRule'
+class LSystem {
+    constructor(iterNum, angle, color) {
+        // //save and restore turtle states as traversing the grammar string
+        // QStack<Turtle> turtleStack;
+        // //mapping char to expanded string for the grammar expansion step
+        // std::map<QChar, QString> charToRule;
+        // //mapping char to function pointer(draw operations)
+        // typedef Turtle (LSystem::*Rule)(Turtle);
+        // std::map<QChar, Rule> charToDrawingOperation;
+        this.axiom = "FX";
+        this.expandedGrammar = "";
+        this.charToExpansionRule = new Map();
+        this.charToDrawingOperation = new Map();
+        this.turtleStack = [];
+        this.cylinderTransformCol0 = [];
+        this.cylinderTransformCol1 = [];
+        this.cylinderTransformCol2 = [];
+        this.cylinderTransformCol3 = [];
+        this.cylinderColorCol = [];
+        this.cylinderNum = 0;
+        this.dodecTransformCol0 = [];
+        this.dodecTransformCol1 = [];
+        this.dodecTransformCol2 = [];
+        this.dodecTransformCol3 = [];
+        this.dodecColorCol = [];
+        this.dodecNum = 0;
+        this.iterationNum = iterNum;
+        this.angleVal = angle;
+        this.cylinderColor = color;
+        this.currTurtle = new __WEBPACK_IMPORTED_MODULE_1__Turtle__["a" /* default */](__WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0, 0, 0), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0, 0, 1), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(1, 0, 0), __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0, 1, 0), 0);
+        this.setExpansionRule();
+        this.expandGrammar();
+    }
+    expandGrammar() {
+        let expandStr = this.axiom;
+        for (let i = 0; i < this.iterationNum; i++) {
+            let expanding = "";
+            for (let j = 0; j < expandStr.length; j++) {
+                let currChar = expandStr[j];
+                if (currChar == 'F') {
+                    expanding += this.charToExpansionRule.get('F');
+                }
+                else if (currChar == 'X') {
+                    if ((Math.random() % 10) > 5) {
+                        expanding += this.charToExpansionRule.get('X');
+                    }
+                    else {
+                        expanding += this.charToExpansionRule.get('Z');
+                    }
+                }
+                else if (currChar == 'Z') {
+                    expanding += this.charToExpansionRule.get('Z');
+                }
+                else {
+                    expanding += currChar;
+                }
+            }
+            expandStr = expanding;
+        }
+        console.log("Expanded Grammar: " + expandStr);
+        this.expandedGrammar = expandStr;
+    }
+    setExpansionRule() {
+        this.charToExpansionRule.set('F', "F[-F]F*[+F]*");
+        this.charToExpansionRule.set('X', "F-[[X]+FX]+F[+FX]-X");
+        this.charToExpansionRule.set('Z', "F[+F]F[[-XF]+F]");
+        // X
+        // X->F-[[X]+X]+F[+FX]-X
+        // F->FF*
+        this.charToDrawingOperation.set('F', () => { this.drawLineMoveForward(); });
+        this.charToDrawingOperation.set('-', () => { this.rotateAroundForward(); });
+        this.charToDrawingOperation.set('+', () => { this.rotateAroundRight(); });
+        this.charToDrawingOperation.set('^', () => { this.rotateAroundUp(); });
+        this.charToDrawingOperation.set('*', () => { this.drawLeaf(); });
+        this.charToDrawingOperation.set('[', () => { this.pushState(); });
+        this.charToDrawingOperation.set(']', () => { this.popState(); });
+    }
+    runOperations() {
+        console.log("Run Operations for " + this.expandedGrammar);
+        for (let i = 0; i < this.expandedGrammar.length; i++) {
+            let currChar = this.expandedGrammar[i];
+            // console.log("curr char: " + currChar);
+            let currFunc = this.charToDrawingOperation.get(currChar);
+            if (currFunc) {
+                currFunc();
+            }
+        }
+        // console.log(this.turtleStack.length);
+    }
+    drawLineMoveForward() {
+        this.currTurtle.moveForward();
+        let transformMat = this.currTurtle.getTransformationMatrix();
+        this.cylinderTransformCol0.push(transformMat[0], transformMat[1], transformMat[2], transformMat[3]);
+        this.cylinderTransformCol1.push(transformMat[4], transformMat[5], transformMat[6], transformMat[7]);
+        this.cylinderTransformCol2.push(transformMat[8], transformMat[9], transformMat[10], transformMat[11]);
+        this.cylinderTransformCol3.push(transformMat[12], transformMat[13], transformMat[14], transformMat[15]);
+        this.cylinderColorCol.push(this.cylinderColor[0], this.cylinderColor[1], this.cylinderColor[2], this.cylinderColor[3]);
+        this.cylinderNum += 1;
+    }
+    drawLeaf() {
+        // this.currTurtle.fruitMoveForward();
+        let transformMat = this.currTurtle.getTransformationMatrix();
+        this.dodecTransformCol0.push(transformMat[0], transformMat[1], transformMat[2], transformMat[3]);
+        this.dodecTransformCol1.push(transformMat[4], transformMat[5], transformMat[6], transformMat[7]);
+        this.dodecTransformCol2.push(transformMat[8], transformMat[9], transformMat[10], transformMat[11]);
+        this.dodecTransformCol3.push(transformMat[12], transformMat[13], transformMat[14], transformMat[15]);
+        this.dodecColorCol.push(0.8, 0.6, 0.2, 1.0);
+        this.dodecNum += 1;
+    }
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    rotateAroundForward() {
+        // math::RotationMatrix<float> mat(0,Deg2Rad*degrees); // X axis
+        // math::RotationMatrix<float> world2local(forward, left, up); 
+        // up =  world2local * mat * vec3(0,0,1);
+        // left = world2local * mat * vec3(0,1,0);
+        // forward = world2local * mat * vec3(1,0,0);
+        let currMat = this.currTurtle.currentMatrix();
+        let result = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].create();
+        let angle = this.getRandomArbitrary(this.angleVal - 5, this.angleVal + 15);
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].rotateZ(result, currMat, angle);
+        this.currTurtle.updateOrientation(result);
+    }
+    rotateAroundRight() {
+        let currMat = this.currTurtle.currentMatrix();
+        let result = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].create();
+        let angle = this.getRandomArbitrary(this.angleVal - 5, this.angleVal + 15);
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].rotateX(result, currMat, angle);
+        this.currTurtle.updateOrientation(result);
+    }
+    rotateAroundUp() {
+        let currMat = this.currTurtle.currentMatrix();
+        let result = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].create();
+        let angle = this.getRandomArbitrary(this.angleVal - 5, this.angleVal + 15);
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].rotateY(result, currMat, angle);
+        this.currTurtle.updateOrientation(result);
+    }
+    pushState() {
+        let cloneTurtle = this.currTurtle.clone();
+        this.turtleStack.push(cloneTurtle);
+        this.currTurtle.recursionDepth += 1;
+    }
+    popState() {
+        this.currTurtle = this.turtleStack.pop();
+    }
+}
+/* harmony default export */ __webpack_exports__["a"] = (LSystem);
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_gl_matrix__ = __webpack_require__(1);
+// A Turtle class to represent the current drawing state of your 
+// L-System. It should at least keep track of its current position, 
+// current orientation, and recursion depth (how many [ characters 
+// have been found while drawing before ]s)
+
+class Turtle {
+    constructor(pos, f, r, u, recDepth) {
+        this.position = pos;
+        this.forwardVector = f;
+        this.rightVector = r;
+        this.upVector = u;
+        this.recursionDepth = recDepth;
+        this.scaleVal = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(0.3, 3.0, 0.3);
+    }
+    moveForward() {
+        // add(this.position, this.position, this.orientation * 10.0);
+        let moveVal = this.scaleVal[1];
+        let offset = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(this.upVector[0] * moveVal, this.upVector[1] * moveVal, this.upVector[2] * moveVal);
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].add(this.position, this.position, offset);
+    }
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+    fruitMoveForward() {
+        // add(this.position, this.position, this.orientation * 10.0);
+        // let moveVal = this.getRandomArbitrary(1.0, 3.0);
+        let offset = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(this.getRandomArbitrary(0.2, 1.0), this.getRandomArbitrary(0.2, 1.0), this.getRandomArbitrary(0.2, 1.0));
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].add(this.position, this.position, offset);
+    }
+    currentMatrix() {
+        let mat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].fromValues(this.rightVector[0], this.rightVector[1], this.rightVector[2], 0, this.upVector[0], this.upVector[1], this.upVector[2], 0, this.forwardVector[0], this.forwardVector[1], this.forwardVector[2], 0, 0, 0, 0, 1);
+        return mat;
+    }
+    getTransformationMatrix() {
+        let tMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].create();
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].fromTranslation(tMat, this.position);
+        let rMat = this.currentMatrix();
+        let sMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].fromValues(this.scaleVal[0], 0, 0, 0, 0, this.scaleVal[1], 0, 0, 0, 0, this.scaleVal[2], 0, 0, 0, 0, 1);
+        // let sMat = mat4.create();
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].identity(sMat);
+        let transformMat = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].create();
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].multiply(transformMat, rMat, sMat);
+        __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["b" /* mat4 */].multiply(transformMat, tMat, transformMat);
+        return transformMat;
+    }
+    updateOrientation(mat) {
+        this.rightVector = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(mat[0], mat[1], mat[2]);
+        this.upVector = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(mat[4], mat[5], mat[6]);
+        this.forwardVector = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(mat[8], mat[9], mat[10]);
+    }
+    clone() {
+        let clonePos = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(this.position[0], this.position[1], this.position[2]);
+        let cloneForward = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(this.forwardVector[0], this.forwardVector[1], this.forwardVector[2]);
+        let cloneRight = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(this.rightVector[0], this.rightVector[1], this.rightVector[2]);
+        let cloneUp = __WEBPACK_IMPORTED_MODULE_0_gl_matrix__["c" /* vec3 */].fromValues(this.upVector[0], this.upVector[1], this.upVector[2]);
+        // let cloneScale = vec3.fromValues(this.scaleVal[0], this.scaleVal[1], this.scaleVal[2]);
+        let cloneTurtle = new Turtle(clonePos, cloneForward, cloneRight, cloneUp, this.recursionDepth);
+        return cloneTurtle;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Turtle;
+
+
+
+/***/ }),
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+let dodecObjStr = `# This file uses centimeters as units for non-parametric coordinates.
+
+mtllib fruit.mtl
+g default
+v 0.000000 0.000000 -1.269964
+v 0.918954 0.667659 -0.567945
+v -0.351009 1.080296 -0.567945
+v -1.135890 -0.000000 -0.567945
+v -0.351009 -1.080295 -0.567945
+v 0.918954 -0.667659 -0.567945
+v 1.135890 0.000000 0.567945
+v 0.351009 1.080296 0.567945
+v -0.918954 0.667659 0.567945
+v -0.918954 -0.667659 0.567945
+v 0.351009 -1.080295 0.567945
+v 0.000000 0.000000 1.269964
+vt 1.000000 0.500000
+vt 0.838104 0.676208
+vt 0.088104 0.823792
+vt 0.176208 0.500000
+vt 0.088104 0.176208
+vt 0.838104 0.323792
+vt 0.676208 0.500000
+vt 0.588104 0.823792
+vt 0.338104 0.676208
+vt 0.338104 0.323792
+vt 0.588104 0.176208
+vt 0.500000 0.500000
+vt 1.088104 0.823792
+vt 1.176208 0.500000
+vt 1.088104 0.176208
+vn 0.187593 0.577350 -0.794654
+vn 0.187593 0.577350 -0.794655
+vn 0.187593 0.577350 -0.794654
+vn -0.491123 0.356822 -0.794654
+vn -0.491123 0.356822 -0.794654
+vn -0.491123 0.356822 -0.794654
+vn -0.491123 -0.356822 -0.794654
+vn -0.491123 -0.356822 -0.794654
+vn -0.491123 -0.356822 -0.794654
+vn 0.187592 -0.577350 -0.794654
+vn 0.187592 -0.577350 -0.794654
+vn 0.187592 -0.577350 -0.794654
+vn 0.607062 -0.000000 -0.794654
+vn 0.607062 -0.000000 -0.794654
+vn 0.607062 -0.000000 -0.794654
+vn 0.303531 0.934172 -0.187593
+vn 0.303531 0.934172 -0.187593
+vn 0.303531 0.934172 -0.187593
+vn -0.794655 0.577350 -0.187592
+vn -0.794655 0.577350 -0.187592
+vn -0.794655 0.577350 -0.187592
+vn -0.794654 -0.577350 -0.187592
+vn -0.794654 -0.577350 -0.187592
+vn -0.794654 -0.577350 -0.187592
+vn 0.303531 -0.934172 -0.187593
+vn 0.303531 -0.934172 -0.187593
+vn 0.303531 -0.934172 -0.187593
+vn 0.982247 0.000000 -0.187593
+vn 0.982247 0.000000 -0.187593
+vn 0.982247 0.000000 -0.187593
+vn 0.794654 0.577350 0.187592
+vn 0.794654 0.577350 0.187592
+vn 0.794654 0.577350 0.187592
+vn -0.303531 0.934172 0.187593
+vn -0.303531 0.934172 0.187593
+vn -0.303531 0.934172 0.187593
+vn -0.982247 0.000000 0.187593
+vn -0.982247 0.000000 0.187593
+vn -0.982247 0.000000 0.187593
+vn -0.303531 -0.934172 0.187592
+vn -0.303531 -0.934172 0.187592
+vn -0.303531 -0.934172 0.187592
+vn 0.794654 -0.577350 0.187592
+vn 0.794654 -0.577350 0.187592
+vn 0.794655 -0.577350 0.187592
+vn 0.491123 0.356822 0.794654
+vn 0.491123 0.356822 0.794654
+vn 0.491123 0.356822 0.794654
+vn -0.187592 0.577350 0.794654
+vn -0.187593 0.577350 0.794654
+vn -0.187593 0.577350 0.794654
+vn -0.607062 -0.000000 0.794654
+vn -0.607062 -0.000000 0.794654
+vn -0.607062 -0.000000 0.794654
+vn -0.187592 -0.577350 0.794654
+vn -0.187592 -0.577350 0.794654
+vn -0.187592 -0.577350 0.794654
+vn 0.491123 -0.356822 0.794654
+vn 0.491123 -0.356822 0.794654
+vn 0.491123 -0.356822 0.794655
+s off
+g pPlatonic1
+usemtl initialShadingGroup
+f 1/1/1 3/13/2 2/2/3
+f 1/1/4 4/14/5 3/13/6
+f 1/1/7 5/15/8 4/14/9
+f 1/1/10 6/6/11 5/15/12
+f 1/1/13 2/2/14 6/6/15
+f 2/2/16 3/13/17 8/8/18
+f 3/3/19 4/4/20 9/9/21
+f 4/4/22 5/5/23 10/10/24
+f 5/15/25 6/6/26 11/11/27
+f 6/6/28 2/2/29 7/7/30
+f 2/2/31 8/8/32 7/7/33
+f 3/3/34 9/9/35 8/8/36
+f 4/4/37 10/10/38 9/9/39
+f 5/5/40 11/11/41 10/10/42
+f 6/6/43 7/7/44 11/11/45
+f 7/7/46 8/8/47 12/12/48
+f 8/8/49 9/9/50 12/12/51
+f 9/9/52 10/10/53 12/12/54
+f 10/10/55 11/11/56 12/12/57
+f 11/11/58 7/7/59 12/12/60
+`;
+/* harmony default export */ __webpack_exports__["a"] = (dodecObjStr);
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports) {
+
+module.exports = "#version 300 es\n\nuniform mat4 u_ViewProj;\nuniform float u_Time;\n\nuniform mat3 u_CameraAxes; // Used for rendering particles as billboards (quads that are always looking at the camera)\n// gl_Position = center + vs_Pos.x * camRight + vs_Pos.y * camUp;\n\nin vec4 vs_Pos; // Non-instanced; each particle is the same quad drawn in a different place\nin vec4 vs_Nor; // Non-instanced, and presently unused\nin vec4 vs_Col; // An instanced rendering attribute; each particle instance has a different color\nin vec3 vs_Translate; // Another instance rendering attribute used to position each quad instance in the scene\nin vec2 vs_UV; // Non-instanced, and presently unused in main(). Feel free to use it for your meshes.\nin vec4 vs_Transform0;\nin vec4 vs_Transform1;\nin vec4 vs_Transform2;\nin vec4 vs_Transform3;\n\nout vec4 fs_Col;\nout vec4 fs_Pos;\nout vec4 fs_Nor;\n\nvoid main()\n{\n    fs_Col = vs_Col;\n    fs_Pos = vs_Pos;\n    fs_Nor = vs_Nor;\n\n    mat4 transformMat = mat4(vs_Transform0, vs_Transform1, vs_Transform2, vs_Transform3);\n    vec4 newPos = transformMat * vs_Pos;\n\n    // vec3 offset = vs_Translate;\n    // offset.z = (sin((u_Time + offset.x) * 3.14159 * 0.1) + cos((u_Time + offset.y) * 3.14159 * 0.1)) * 1.5;\n\n    // vec3 billboardPos = offset + vs_Pos.x * u_CameraAxes[0] + vs_Pos.y * u_CameraAxes[1];\n    fs_Pos = newPos;\n    gl_Position = u_ViewProj * newPos;\n}\n"
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports) {
+
+module.exports = "#version 300 es\nprecision highp float;\n\nin vec4 fs_Col;\nin vec4 fs_Pos;\nin vec4 fs_Nor;\n\nout vec4 out_Col;\n\nvoid main()\n{\n    // float dist = 1.0 - (length(fs_Pos.xyz) * 2.0);\n    // out_Col = vec4(dist) * fs_Col;\n\n    vec3 lightPos = vec3(10.f, 10.f, 30.f);\n    float diffuseTerm = dot(normalize(fs_Nor.xyz), normalize(lightPos - fs_Pos.xyz));\n    diffuseTerm = clamp(diffuseTerm, 0.f, 1.f);\n    float ambientTerm = 0.2;\n    float lightIntensity = diffuseTerm + ambientTerm;\n    vec3 col = fs_Col.rgb;\n\n\n    out_Col = vec4(col * lightIntensity, fs_Col[3]);\n}\n"
+
+/***/ }),
+/* 77 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\nprecision highp float;\n\n// The vertex shader used to render the background of the scene\n\nin vec4 vs_Pos;\nout vec2 fs_Pos;\n\nvoid main() {\n  fs_Pos = vs_Pos.xy;\n  gl_Position = vs_Pos;\n}\n"
 
 /***/ }),
-/* 72 */
+/* 78 */
 /***/ (function(module, exports) {
 
 module.exports = "#version 300 es\nprecision highp float;\n\nuniform vec3 u_Eye, u_Ref, u_Up;\nuniform vec2 u_Dimensions;\nuniform float u_Time;\n\nin vec2 fs_Pos;\nout vec4 out_Col;\n\nvoid main() {\n  out_Col = vec4(0.5 * (fs_Pos + vec2(1.0)), 0.0, 1.0);\n}\n"
