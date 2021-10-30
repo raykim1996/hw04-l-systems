@@ -3,7 +3,7 @@
 ## Submission Details
 - Name: Ray DongHo Kim
 - PennKey: kdongho
-- Live Demo: https://raykim1996.github.io/hw03-advanced-raymarching/
+- Live Demo: https://raykim1996.github.io/hw04-l-systems/
 - The main class used for the L-System generation is LSystem and Turtle class. LSystem contains all the core data, such as axiom, expansion rules, drawing operations, for correct expansion of the LSystem input string. Turtle class keeps track of information like position, orientation, recursion depth, to draw correct branches for each character of the expanded string. User can modify angle, iteration number, color to change the result scene. 
 - Reference Image:
   - <img height="360" src="img/HW-04-1.png">
