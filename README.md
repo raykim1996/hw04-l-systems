@@ -1,5 +1,15 @@
 # Homework 4: L-systems
 
+## Submission Details
+- Name: Ray DongHo Kim
+- PennKey: kdongho
+- Live Demo: https://raykim1996.github.io/hw03-advanced-raymarching/
+- The main class used for the L-System generation is LSystem and Turtle class. LSystem contains all the core data, such as axiom, expansion rules, drawing operations, for correct expansion of the LSystem input string. Turtle class keeps track of information like position, orientation, recursion depth, to draw correct branches for each character of the expanded string. User can modify angle, iteration number, color to change the result scene. 
+- Reference Image:
+  - <img height="360" src="img/HW-04-1.png">
+- Screenshot:
+  - <img height="360" src="img/HW-04-2.png">
+
 For this assignment, you will design a set of formal grammar rules to create
 a plant life using an L-system program. Once again, you will work from a
 TypeScript / WebGL 2.0 base code like the one you used in homework 0. You will
